@@ -3,6 +3,16 @@ class Logger
     @f = File.open 'log.txt', 'a'
   end
 
+  @@x = nil
+
+  def self.instance
+    if @@x == nil
+      @@x = Logger.new
+    end
+
+    return @@x
+  end
+
   # class method
   def self.say_something
     puts "Hello"
@@ -15,6 +25,8 @@ class Logger
 end
 
 Logger.say_something
+Logger.instance.log_something 'blabla'
+Logger.instance.log_something 'blabla2'
 
 Logger = Logger.new
 Logger.log_something 'Hey!'
